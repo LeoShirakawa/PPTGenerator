@@ -106,9 +106,9 @@ ADKエージェントを介して、自然言語でプレゼンテーション�
 ## 4. ADK Webでのテスト
 
 1.  ADKプロジェクトのルートディレクトリで、環境変数（特に`CLOUD_RUN_SERVICE_URL`）が`.env`ファイルに正しく設定されていることを確認します。
-2.  ADKを起動します。
+2.  ADKプロジェクトのルートディレクトリ（この`PPTGenerator`ディレクトリの一つ上の階層）に移動し、ADK Webを起動します。
     ```bash
-    adk run .
+    adk web
     ```
 3.  ブラウザでADK Web UIを開きます。
 4.  エージェントリストから `presentation_generator_agent_v3` を選択します。
