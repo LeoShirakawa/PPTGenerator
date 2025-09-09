@@ -83,25 +83,22 @@ ADKエージェントを介して、自然言語でプレゼンテーション�
     gcloud config set project YOUR_PROJECT_ID
     ```
 
-2.  **Cloud Buildを使ってコンテナイメージをビルドします。**
-    ```bash
-    gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/ppt-generator
-    ```
-
-3.  **ビルドしたイメージをCloud Runにデプロイします。**
+2.  **ソースコードから直接Cloud Runにデプロイします。**
+    以下のコマンドは、ソースコードのビルドとデプロイを一度に実行します。
     ```bash
     gcloud run deploy ppt-generator-service \
-      --image gcr.io/YOUR_PROJECT_ID/ppt-generator \
+      --source . \
       --platform managed \
       --region YOUR_REGION \
       --allow-unauthenticated \
-      --set-env-vars GCS_BUCKET_NAME="YOUR_GCS_BUCKET_NAME",GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID",GOOGLE_CLOUD_LOCATION="YOUR_REGION"
+      --set-env-vars="GCS_BUCKET_NAME=YOUR_GCS_BUCKET_NAME,GOOGLE_CLOUD_PROJECT=YOUR_PROJECT_ID,GOOGLE_CLOUD_LOCATION=YOUR_REGION,GOOGLE_GENAI_USE_VERTEXAI=TRUE"
     ```
     - `YOUR_PROJECT_ID`: あなたのGoogle CloudプロジェクトID
     - `YOUR_REGION`: デプロイするリージョン (例: `us-central1`)
     - `YOUR_GCS_BUCKET_NAME`: ステップ2で作成したGCSバケット名
 
     デプロイが完了すると、サービスのURLが表示されます。このURLをコピーし、`.env` ファイルの `CLOUD_RUN_SERVICE_URL` に設定してください。
+
 
 ## 4. ADK Webでのテスト
 
